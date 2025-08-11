@@ -7,6 +7,7 @@ import (
 
 type ProductService interface {
 	Create(product *models.Product) error
+	GetAll() ([]models.Product, error)
 }
 
 type productService struct {
@@ -19,4 +20,8 @@ func NewProductService(repo repositories.ProductRepository) ProductService {
 
 func (ps *productService) Create(product *models.Product) error {
 	return ps.repo.Create(product)
+}
+
+func (ps *productService) GetAll() ([]models.Product, error) {
+	return ps.repo.GetAll()
 }

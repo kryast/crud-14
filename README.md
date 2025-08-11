@@ -8,3 +8,6 @@ curl -X POST http://localhost:8080/product \
   "price": 18500000.50,
   "stock": 10
 }
+
+GET
+curl -X GET http://localhost:8080/product

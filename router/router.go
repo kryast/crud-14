@@ -16,6 +16,7 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 	h := handlers.NewProductHandler(svc)
 
 	r.PUT("/product", h.Create)
+	r.GET("/product", h.GetAll)
 
 	return r
 

@@ -30,3 +30,14 @@ func (ph *ProductHandler) Create(c *gin.Context) {
 
 	c.JSON(http.StatusOK, product)
 }
+
+func (ph *ProductHandler) GetAll(c *gin.Context) {
+
+	products, err := ph.service.GetAll()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err})
+		return
+	}
+
+	c.JSON(http.StatusOK, products)
+}
