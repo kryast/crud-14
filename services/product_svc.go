@@ -1,8 +1,13 @@
 package services
 
-import "github.com/kryast/crud-14.git/repositories"
+import (
+	"github.com/kryast/crud-14.git/models"
+	"github.com/kryast/crud-14.git/repositories"
+)
 
-type ProductService interface{}
+type ProductService interface {
+	Create(product *models.Product) error
+}
 
 type productService struct {
 	repo repositories.ProductRepository
@@ -10,4 +15,8 @@ type productService struct {
 
 func NewProductService(repo repositories.ProductRepository) ProductService {
 	return &productService{repo}
+}
+
+func (ps *productService) Create(product *models.Product) error {
+	return ps.repo.Create(product)
 }

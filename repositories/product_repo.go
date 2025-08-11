@@ -1,8 +1,13 @@
 package repositories
 
-import "gorm.io/gorm"
+import (
+	"github.com/kryast/crud-14.git/models"
+	"gorm.io/gorm"
+)
 
-type ProductRepository interface{}
+type ProductRepository interface {
+	Create(product *models.Product) error
+}
 
 type productRepository struct {
 	db *gorm.DB
@@ -10,4 +15,8 @@ type productRepository struct {
 
 func NewProductRepository(db *gorm.DB) ProductRepository {
 	return &productRepository{db}
+}
+
+func (pr *productRepository) Create(product *models.Product) error {
+	return pr.db.Create(product).Error
 }
