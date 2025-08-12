@@ -17,6 +17,7 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 
 	r.PUT("/product", h.Create)
 	r.GET("/product", h.GetAll)
+	r.GET("/product/:id", h.GetByID)
 
 	return r
 

@@ -8,6 +8,7 @@ import (
 type ProductRepository interface {
 	Create(product *models.Product) error
 	GetAll() ([]models.Product, error)
+	GetByID(id uint) (*models.Product, error)
 }
 
 type productRepository struct {
@@ -28,4 +29,12 @@ func (pr *productRepository) GetAll() ([]models.Product, error) {
 
 	return products, err
 
+}
+
+func (pr *productRepository) GetByID(id uint) (*models.Product, error) {
+	var product models.Product
+
+	err := pr.db.First(&product, id).Error
+
+	return &product, err
 }

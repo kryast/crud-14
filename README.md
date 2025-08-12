@@ -11,3 +11,4 @@ curl -X POST http://localhost:8080/product \
 
 GET
 curl -X GET http://localhost:8080/product
+curl -X GET http://localhost:8080/product/1

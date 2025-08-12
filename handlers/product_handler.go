@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/kryast/crud-14.git/models"
@@ -40,4 +41,16 @@ func (ph *ProductHandler) GetAll(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, products)
+}
+
+func (ph *ProductHandler) GetByID(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	product, err := ph.service.GetByID(uint(id))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err})
+		return
+	}
+
+	c.JSON(http.StatusOK, product)
 }
