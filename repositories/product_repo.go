@@ -9,6 +9,7 @@ type ProductRepository interface {
 	Create(product *models.Product) error
 	GetAll() ([]models.Product, error)
 	GetByID(id uint) (*models.Product, error)
+	Update(product *models.Product) error
 }
 
 type productRepository struct {
@@ -37,4 +38,8 @@ func (pr *productRepository) GetByID(id uint) (*models.Product, error) {
 	err := pr.db.First(&product, id).Error
 
 	return &product, err
+}
+
+func (pr *productRepository) Update(product *models.Product) error {
+	return pr.db.Save(product).Error
 }

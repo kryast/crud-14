@@ -54,3 +54,21 @@ func (ph *ProductHandler) GetByID(c *gin.Context) {
 
 	c.JSON(http.StatusOK, product)
 }
+
+func (ph *ProductHandler) Update(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	var product models.Product
+	if err := c.ShouldBindJSON(&product); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"Error": err})
+		return
+	}
+
+	product.ID = uint(id)
+	if err := ph.service.Update(&product); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"Error": err})
+		return
+	}
+
+	c.JSON(http.StatusOK, product)
+}
