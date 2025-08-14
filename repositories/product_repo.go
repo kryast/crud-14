@@ -10,6 +10,7 @@ type ProductRepository interface {
 	GetAll() ([]models.Product, error)
 	GetByID(id uint) (*models.Product, error)
 	Update(product *models.Product) error
+	Delete(id uint) error
 }
 
 type productRepository struct {
@@ -42,4 +43,8 @@ func (pr *productRepository) GetByID(id uint) (*models.Product, error) {
 
 func (pr *productRepository) Update(product *models.Product) error {
 	return pr.db.Save(product).Error
+}
+
+func (pr *productRepository) Delete(id uint) error {
+	return pr.db.Delete(&models.Product{}, id).Error
 }

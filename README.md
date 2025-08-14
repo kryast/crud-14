@@ -21,3 +21,6 @@ curl -X PUT http://localhost:8080/product/1 \
   "price": 19000000.00,
   "stock": 8
 }'
+
+DELETE
+curl -X DELETE http://localhost:8080/product/1
